@@ -1,0 +1,9 @@
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_OUT = 'SIGN_OUT';
+export const FETCH_STUDENTS = 'FETCH_STUDENTS';
+export const FETCH_TEACHER_CLASSES = 'FETCH_CLASSES';
+export const UPDATE_STUDENT_ATTENDANCE = 'UPDATE_ATTENDANCE';
+export const USER_LOADED = 'USER_LOADED';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';

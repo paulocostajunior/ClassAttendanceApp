@@ -1,16 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
 
-
-
-const ListSubject = props => (
+const ListSubject = props => {
     // <TouchableOpacity onPress={props.onItemPressed}>
-    <TouchableOpacity onPress={props.onItemPressed}>
-        <View style={[styles.sectionStyle, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }]}>
-            <Text>{props.item.turma} - {props.item.materia}</Text>
-        </View>
-    </TouchableOpacity>
-);
+    //console.log(props.item);
+    return (
+        <TouchableOpacity onPress={props.onItemPressed}>
+            <View style={[styles.sectionStyle, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }]}>
+                <Text>{props.item.turmas[0].materias[0].nome}</Text>
+            </View>
+        </TouchableOpacity>
+    )
+};
 
 const styles = StyleSheet.create({
     listContainer: {

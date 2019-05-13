@@ -7,57 +7,34 @@ class ClassStudent extends Component {
     constructor(props) {
         super(props);
     }
-    
-    state = {
-        studentObject: ''
-    }
 
-    setAttendance = (item) => {
-        item.attendance == false ? item.attendance = true : item.attendance = false
+    // setAttendance = (item) => {
+    //     item.attendance == false ? item.attendance = true : item.attendance = false
         
-        this.setState({
-            studentObject: item,
-        })
-    }
+    //     this.setState({
+    //         studentObject: item,
+    //     })
+    // }
 
     render() {
-        //console.log(this.props.item.materia);
-        //console.log(this.state.data);
+        console.log('classStudent',this.props.item)
         return (
-            //if the object state was here...
-            // <View>
-            //     { 
-            //         this.state.data.map((item, index) => (
-            //             item.students.map((c, i) => ( 
-            //             (
-            //                 <ListStudent 
-            //                     key={i} 
-            //                     item={c}
-            //                 />
-            //             )
-            //         ))
-            //     ))}
-            // </View>
-            <View >
-                {this.props.item.students.map((item, index) => (
-                    <ListStudent 
-                        key={index}
-                        item={item}
-                        onItemPressed ={() => this.setAttendance(item)}
-                        studentObject={this.state.studentObject}
-                        //pass color here
-                    />
-                ))}
+            <View>
+                { this.props.item.turmas[0].materias[0].alunos.map((item, index) => {
+                     console.log(item.nome)
+                     return (
+                        <ListStudent
+                            key={item.codigo} 
+                            item={item.nome}
+                            // onItemPressed={() => this.classRoomHandler(this.props.item)}
+                        />
+                     )
+                    
+                })} 
             </View>
         )
     };
 };
 
-const mapStateToProps = state => {
-    return {
-        classes: state.classes
-    };
-};
-
-export default connect(mapStateToProps)(ClassStudent);
+export default ClassStudent;
 

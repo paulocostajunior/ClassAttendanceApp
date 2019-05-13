@@ -1,38 +1,36 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
 
-const ListStudent = props => (
+const ListStudent = props => {
+    return (
     
     // <TouchableOpacity onPress={props.onItemPressed}>
-    <TouchableOpacity onPress={props.onItemPressed}>
-    {console.log(props.studentObject.name)}
-    {/* {console.log(props.studentObject.attendance)} */}
-    {/* {console.log(props)} */}
-    {/* {console.log(props.studentObject.attendance)} */}
+    <TouchableOpacity>
         <View 
             style=  {[
                         styles.sectionStyle,
                         { flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-evenly',
-                        },
+                        }
 
-                        props.item.attendance === false ? styles.bgColorRed : null,
-                        props.item.attendance === true ? styles.bgColorGreen : null,
+                        // props.item.attendance === false ? styles.bgColorRed : null,
+                        // props.item.attendance === true ? styles.bgColorGreen : null,
                         
-                        props.item.name == props.studentObject.name && 
-                        props.item.attendance == false 
-                        ? styles.bgColorRed : null,
+                        // props.item.name == props.studentObject.name && 
+                        // props.item.attendance == false 
+                        // ? styles.bgColorRed : null,
 
-                        props.item.name == props.studentObject.name && 
-                        props.item.attendance == true
-                        ? styles.bgColorGreen : null
+                        // props.item.name == props.studentObject.name && 
+                        // props.item.attendance == true
+                        // ? styles.bgColorGreen : null
                     ]}
         >
-            <Text>{props.item.name}</Text>
+            <Text>{props.item}</Text>
         </View>
     </TouchableOpacity>
-);
+    )
+};
 
 const styles = StyleSheet.create({
     listContainer: {

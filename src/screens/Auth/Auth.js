@@ -6,16 +6,56 @@ import backgroundImage from '../../assets/classRoom.jpg';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
 import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
 
+import { connect } from 'react-redux';
+import { PropTypes} from 'prop-types';
+import { login } from '../../actions/auth';
+
+// const Login = ({ login, isAuthenticated }) => {
+//     const [formData, setFormData] = useState({
+//         email: '',
+//         password: ''
+//     });
+
+//     const {email, password} = formData;
+
+//     const onChange = e => 
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+//     const onSubmit = async e => {
+//         e.preventDefault();
+//         console.log('SUCCESS')
+//     }
+// }
+
+if (isAuthenticated) {
+    this.props.navigation.navigate('Home');
+}
 
 class Auth extends Component {
+    state = {
+        login: "",
+        password: "",
+    }
+
     static navigationOptions = {
         title: 'Log In',
     };
     
     loginHandler = () => {
         //alert('test')
-        this.props.navigation.navigate('Home');
+        //this.props.navigation.navigate('Home');
+        console.log('state', state);
       };
+
+    onLoginChange = (e) => {
+        const login = e.target.value;
+        this.setState({ login });
+    }
+
+    onPassChange = (e) => {
+        const password = e.target.value;
+        this.setState({ password });
+    }
 
     render(){
         return(
@@ -28,6 +68,7 @@ class Auth extends Component {
                             <DefaultInput 
                                 placeholder="Login"
                                 style={styles.input}
+                                onChangeText={(e) => this.onLoginChange(e)}
                             />
                         </View>
                     </View>
@@ -37,11 +78,12 @@ class Auth extends Component {
                                 style={styles.input}
                                 placeholder="Password"
                                 secureTextEntry
+                                onChangeText={(e) => this.onPassChange(e)}
                             />
                         </View>
                     </View>
                     <View>
-                    <SubmitButton onPress={this.loginHandler}>Log In</SubmitButton>
+                    <SubmitButton onPress={this.loginHandler()}>Log In</SubmitButton>
                     </View>
                 </View>
             </View>
@@ -85,4 +127,13 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Auth;
+login.propTypes = {
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect (mapStateToProps, { login })(Auth);

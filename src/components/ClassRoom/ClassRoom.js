@@ -2,41 +2,15 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
 import ListSubject from '../ListSubject/ListSubject';
 import { connect } from 'react-redux';
+import { fetchTeacherClasses } from '../../actions';
 
 class ClassRoom extends Component {
     constructor(props) {
         super(props);
     }
 
-    state = {
-        data: [
-            {
-                materia: 'Biology',
-                turma: '1A',
-                dates:  [
-                            { month: 'Januaray', day: '12', year: '2019'},
-                            { month: 'Januaray', day: '14', year: '2019'},
-                            { month: 'Januaray', day: '16', year: '2019'},
-                        
-                        ],
-                students: [{ name: 'Paulo', attendance: false}, {name:'Joao', attendance: false}, {name: 'Lara', attendance: false}]
-            },
-            {
-                materia: 'English',
-                turma: '2B',
-                dates:  [
-                            { month: 'Januaray', day: '12', year: '2019'},
-                            { month: 'Januaray', day: '14', year: '2019'},
-                            { month: 'Januaray', day: '16', year: '2019'},
-                
-                        ],
-                students: [
-                            { name: 'Paulo', attendance: false},
-                            {name:'Mari', attendance: false},
-                            {name: 'Lara', attendance: false}
-                        ]
-            }
-        ],
+    componentDidMount() {
+        
     }
 
     classRoomHandler = (item) => {
@@ -46,15 +20,19 @@ class ClassRoom extends Component {
     };
     //this.props.classes.data
     render() {
+        //console.log('classRoom',this.props.teacherClasses._id);
         return (
             <View>
-                { this.state.data.map((item, index) => (
-                    <ListSubject 
-                        key={index} 
-                        item={item}
-                        onItemPressed={() => this.classRoomHandler(item)}
-                    />
-                ))}
+                 { this.props.teacherClasses.map((item) => {
+                    return (
+                        // console.log(item)
+                        <ListSubject 
+                            key={item._id} 
+                            item={item}
+                            onItemPressed={() => this.classRoomHandler(item)}
+                        /> 
+                    )
+                })}
             </View>
         )
     };
@@ -62,9 +40,9 @@ class ClassRoom extends Component {
 
 const mapStateToProps = state => {
     return {
-        classes: state.classes
+      teacherClasses: Object.values(state.teacherClasses)
     };
-};
-
+  };
+  
 export default connect(mapStateToProps)(ClassRoom);
 

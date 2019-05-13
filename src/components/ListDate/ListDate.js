@@ -1,22 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
 
-const ListDate = props => (
-    
-    <TouchableOpacity onPress={props.onItemPressed}>
-        <View 
-            style=  {[
-                        styles.sectionStyle,
-                        { flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-evenly',
-                        }
-            ]}
-        >
-            <Text>{props.item.day} - {props.item.month} - {props.item.year}</Text>
-        </View>
-    </TouchableOpacity>
-);
+const ListDate = props => {
+        return (
+            <TouchableOpacity onPress={props.onItemPressed}>
+                <View 
+                    style=  {[
+                                styles.sectionStyle,
+                                { flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-evenly',
+                                }
+                    ]}
+                >
+                    <Text>{props.item}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+};
 
 const styles = StyleSheet.create({
     listContainer: {

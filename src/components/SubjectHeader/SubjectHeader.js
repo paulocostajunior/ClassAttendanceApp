@@ -5,10 +5,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 class SubjectHeader extends Component {
     render() {
+        console.log('header',this.props.item)
         return (
                 <View style={styles.container}>
-                    <Text style={styles.userText}>{this.props.item.materia}</Text>
-                    <Text style={styles.userText}>{this.props.item.turma}</Text>
+                    <Text style={styles.userText}>{this.props.item}</Text>
+                    {/* <Text style={styles.userText}>{this.props.item.turma}</Text> */}
                 </View>
         );
     };
