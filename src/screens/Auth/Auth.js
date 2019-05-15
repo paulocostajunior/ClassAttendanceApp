@@ -1,6 +1,5 @@
 import React , { Component } from 'react';
-import { View , Text, TextInput, StyleSheet, ImageBackground } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { View , Text, TextInput, StyleSheet, ImageBackground, AsyncStorage } from 'react-native';
 
 import backgroundImage from '../../assets/classRoom.jpg';
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
@@ -8,33 +7,14 @@ import SubmitButton from '../../components/UI/SubmitButton/SubmitButton';
 
 import { connect } from 'react-redux';
 import { PropTypes} from 'prop-types';
-import { login } from '../../actions/auth';
 
-// const Login = ({ login, isAuthenticated }) => {
-//     const [formData, setFormData] = useState({
-//         email: '',
-//         password: ''
-//     });
-
-//     const {email, password} = formData;
-
-//     const onChange = e => 
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-//     const onSubmit = async e => {
-//         e.preventDefault();
-//         console.log('SUCCESS')
-//     }
-// }
-
-if (isAuthenticated) {
-    this.props.navigation.navigate('Home');
-}
+import * as UsersAPI from '../../shared/service/UsersAPI';
 
 class Auth extends Component {
     state = {
-        login: "",
+        email: "",
         password: "",
+        // token: ""
     }
 
     static navigationOptions = {
@@ -42,26 +22,36 @@ class Auth extends Component {
     };
     
     loginHandler = () => {
-        //alert('test')
-        //this.props.navigation.navigate('Home');
-        console.log('state', state);
+        UsersAPI.auth(this.state)
+            .then(res => {
+                AsyncStorage.setItem('token', res.token);
+                AsyncStorage.setItem('idProfessor', res.idProfessor);
+                
+                this.props.navigation.navigate('Auth');
+            });
       };
 
     onLoginChange = (e) => {
-        const login = e.target.value;
-        this.setState({ login });
+        const email = e;
+        this.setState({ email });
     }
 
     onPassChange = (e) => {
-        const password = e.target.value;
+        const password = e;
         this.setState({ password });
     }
+
+    // async componentDidMount() {
+    //     const token = await AsyncStorage.getItem('token');
+    //     this.setState({ token });
+    // }
 
     render(){
         return(
             <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
             <View style={styles.container}>
                 <Text style={styles.loginTitle}>Student Attendance</Text>
+                {/* <Text>{this.state.token}</Text> */}
                 <View style={styles.inputContainer}>
                     <View style={styles.portraitPasswordContainer}>
                         <View style={styles.portraitPasswordWrapper}>
@@ -83,7 +73,7 @@ class Auth extends Component {
                         </View>
                     </View>
                     <View>
-                    <SubmitButton onPress={this.loginHandler()}>Log In</SubmitButton>
+                    <SubmitButton onPress={this.loginHandler}>Log In</SubmitButton>
                     </View>
                 </View>
             </View>
@@ -127,13 +117,14 @@ const styles = StyleSheet.create({
     }
 })
 
-login.propTypes = {
-    login: PropTypes.func.isRequired,
+Auth.propTypes = {
     isAuthenticated: PropTypes.bool
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+/*const mapStateToProps = state => ({
+    //isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect (mapStateToProps, { login })(Auth);
+export default connect (mapStateToProps)(Auth);
+*/
+export default Auth;

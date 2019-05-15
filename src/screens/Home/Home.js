@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, AsyncStorage, StyleSheet } from 'react-native';
 import {connect} from 'react-redux';
 import User from '../../components/User/User';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -20,6 +20,7 @@ class HomeScreen extends Component {
     // const data = await getData();
     // this.props.setClasses(data);
     this.props.fetchTeacherClasses();
+    //AsyncStorage.removeItem('token');
     //console.log(this.props.teacherClasses)
   }
 

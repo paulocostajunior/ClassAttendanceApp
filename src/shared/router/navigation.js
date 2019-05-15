@@ -1,18 +1,18 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation'
 import HomeScreen from '../../screens/Home/Home';
 import AuthScreen from '../../screens/Auth/Auth';
 import AttendanceDateScreen from '../../screens/AttendanceDate/AttendanceDate';
 import AttendanceClassScreen from '../../screens/AttendanceClass/AttendanceClass';
+import AuthVerifyScreen from '../../screens/Auth/AuthVerify';
 
-export const RootStack = createStackNavigator(
+const RootStack = createStackNavigator(
     {
-        Auth: { screen: AuthScreen },
         Home: { screen: HomeScreen },
         AttendanceDate: { screen: AttendanceDateScreen },
         AttendanceClass: { screen: AttendanceClassScreen }
     },
     {
-        initialRouteName: 'Auth',
+        initialRouteName: 'Home',
         defaultNavigationOptions: {
             headerStyle: {
                 backgroundColor: '#96C5CA',
@@ -25,4 +25,13 @@ export const RootStack = createStackNavigator(
     }
 );
 
-export const Tabs = createAppContainer(RootStack);
+const Switch = createSwitchNavigator({
+    Auth: { screen: AuthVerifyScreen },
+    Login: { screen: AuthScreen },
+    RootStack: RootStack,
+},
+{
+    initialRouteName: 'Auth' 
+});
+
+export const Tabs = createAppContainer(Switch);
