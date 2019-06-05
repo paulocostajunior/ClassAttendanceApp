@@ -1,4 +1,4 @@
-const api = "https://marmitapp-admin.herokuapp.com/api"
+const api = "http://localhost:5000/api"
 
 const headers = {
     "Content-type": "application/json",

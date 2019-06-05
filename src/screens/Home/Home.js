@@ -16,7 +16,12 @@ class HomeScreen extends Component {
     super(props)
   }
   
-  componentDidMount() {
+  async componentDidMount() {
+  //AsyncStorage.removeItem('token');
+  const teste = await AsyncStorage.getItem('idProfessor');
+  const nameProfessor = await AsyncStorage.getItem('name');
+  //console.log('', nameProfessor)
+
     // const data = await getData();
     // this.props.setClasses(data);
     this.props.fetchTeacherClasses();

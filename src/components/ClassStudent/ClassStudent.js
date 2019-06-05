@@ -20,12 +20,13 @@ class ClassStudent extends Component {
         console.log('classStudent',this.props.item)
         return (
             <View>
-                { this.props.item.turmas[0].materias[0].alunos.map((item, index) => {
-                     console.log(item.nome)
+                { this.props.item.alunos.map((item, index) => {
+                     //console.log(item.nome)
                      return (
                         <ListStudent
                             key={item.codigo} 
                             item={item.nome}
+                            absencias={this.props.item.absencias[index]}
                             // onItemPressed={() => this.classRoomHandler(this.props.item)}
                         />
                      )

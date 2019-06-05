@@ -14,10 +14,10 @@ class AttendanceDate extends React.Component {
 
     render() {
         const item = this.props.navigation.getParam('item');
-        //console.log('attendanceDate',item.turmas[0].materias[0].nome)
+        //console.log('attendanceDate',item)
         return (
             <View>
-                <SubjectHeader item={item.turmas[0].materias[0].nome} />
+                <SubjectHeader item={item.nome} />
                 <ClassDate {...this.props} item={item}/>
             </View>
         );

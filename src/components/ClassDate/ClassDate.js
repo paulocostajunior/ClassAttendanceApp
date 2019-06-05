@@ -17,8 +17,7 @@ class ClassDate extends Component {
         console.log('classDAte',this.props.item)
         return (
             <View>
-                {/* {console.log(this.props.item.turmas[0].materias[0].datas)} */}
-                { this.props.item.turmas[0].materias[0].datas.map((item, index) => {
+                { this.props.item.datas.map((item, index) => {
                     // console.log(item)
                      return (
                         <ListDate

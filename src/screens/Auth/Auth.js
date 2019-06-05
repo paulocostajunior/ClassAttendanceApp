@@ -24,8 +24,10 @@ class Auth extends Component {
     loginHandler = () => {
         UsersAPI.auth(this.state)
             .then(res => {
+                console.log(res);
                 AsyncStorage.setItem('token', res.token);
                 AsyncStorage.setItem('idProfessor', res.idProfessor);
+                AsyncStorage.setItem('name', res.name);
                 
                 this.props.navigation.navigate('Auth');
             });

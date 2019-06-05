@@ -1,31 +1,21 @@
-//server.js
-var express = require("express");
-var path = require("path");
-var bodyParser = require("body-parser");
+const express = require('express');
+const connectDB = require('./config/db');
 
-var index = require("./routes/index");
-var bookings = require("./routes/bookings");
+const app = express();
 
-var app = express();
+// Connect Database
+connectDB();
 
-var port = 3000;
+// Init Middleware
+app.use(express.json({ extended: false }));
 
-app.listen(port, function(){
-    console.log("Server running on port", port);
-});
+app.get('/', (req, res) => res.send('API Running'));
 
-//views
+// Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/teacher-classes', require('./routes/api/teacherClasses'));
 
-app.set("views", path.join(__dirname, "view"));
-app.set("view engine", "ejs");
-app.engine("html", require("ejs").renderFile);
+const PORT = process.env.PORT || 5000;
 
-//Body parser MW
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-
-//Routes
-
-app.use("/", index);
-app.use("/api", bookings);
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

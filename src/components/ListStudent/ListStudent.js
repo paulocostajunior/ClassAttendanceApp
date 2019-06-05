@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
 
 const ListStudent = props => {
+    console.log(props)
     return (
-    
     // <TouchableOpacity onPress={props.onItemPressed}>
     <TouchableOpacity>
         <View 
@@ -12,18 +12,8 @@ const ListStudent = props => {
                         { flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-evenly',
-                        }
-
-                        // props.item.attendance === false ? styles.bgColorRed : null,
-                        // props.item.attendance === true ? styles.bgColorGreen : null,
-                        
-                        // props.item.name == props.studentObject.name && 
-                        // props.item.attendance == false 
-                        // ? styles.bgColorRed : null,
-
-                        // props.item.name == props.studentObject.name && 
-                        // props.item.attendance == true
-                        // ? styles.bgColorGreen : null
+                        },
+                        props.absencias.exists ? styles.bgColorRed : styles.bgColorGreen
                     ]}
         >
             <Text>{props.item}</Text>

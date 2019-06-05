@@ -10,6 +10,7 @@ class AttendanceClass extends React.Component {
 
     render() {
         const item = this.props.navigation.getParam('item');
+        console.log(item)
         return (
             <View>
                 {/* <SubjectHeader item={item} /> */}

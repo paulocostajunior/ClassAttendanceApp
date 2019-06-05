@@ -18,21 +18,25 @@ class ClassRoom extends Component {
             item: item
         });
     };
-    //this.props.classes.data
+    
     render() {
-        //console.log('classRoom',this.props.teacherClasses._id);
+        console.log('classRoom',this.props.teacherClasses);
         return (
             <View>
-                 { this.props.teacherClasses.map((item) => {
-                    return (
-                        // console.log(item)
-                        <ListSubject 
-                            key={item._id} 
-                            item={item}
-                            onItemPressed={() => this.classRoomHandler(item)}
-                        /> 
-                    )
-                })}
+                { this.props.teacherClasses.map((item) => (
+                    item.map((item2) => (
+                        item2.materias.map((item3) => {
+                            return (
+                                <ListSubject 
+                                    key={item._id} 
+                                    item={item3}
+                                    onItemPressed={this.classRoomHandler}
+                                /> 
+                            )
+
+                        })
+                    ))
+                ))}
             </View>
         )
     };

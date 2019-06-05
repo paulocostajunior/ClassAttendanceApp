@@ -3,11 +3,11 @@ import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "r
 
 const ListSubject = props => {
     // <TouchableOpacity onPress={props.onItemPressed}>
-    //console.log(props.item);
+    console.log(props.item);
     return (
-        <TouchableOpacity onPress={props.onItemPressed}>
+        <TouchableOpacity onPress={() => props.onItemPressed(props.item)}>
             <View style={[styles.sectionStyle, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }]}>
-                <Text>{props.item.turmas[0].materias[0].nome}</Text>
+                <Text>{props.item.nome}</Text>
             </View>
         </TouchableOpacity>
     )
