@@ -1,12 +1,13 @@
 import {  
-    FETCH_TEACHER_CLASSES
+    FETCH_TEACHER_CLASSES,
+    FETCH_COMPLETE_TEACHER_CLASSES
 } from '../actions/types';
 import _ from 'lodash';
 
 export default (state = {}, action) => {
     switch (action.type) {
         case FETCH_TEACHER_CLASSES:
-        return { ...state, ..._.mapKeys(action.payload, '_id') };
+            return { ...state, teacherClasses: action.payload };
         // case FETCH_STREAM:
         //    return {...state, [action.payload.id]: action.payload};
         // case CREATE_STREAM:

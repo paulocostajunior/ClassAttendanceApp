@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList, AsyncStorage} from "react-native";
 import ListDate from '../ListDate/ListDate';
 
 class ClassDate extends Component {
@@ -7,14 +7,21 @@ class ClassDate extends Component {
         super(props);
     }
     
-    classRoomHandler = (item) => {  
+    classRoomHandler = (item, index) => {  
         this.props.navigation.navigate('AttendanceClass', {
-            item: item
+            item: item,
+            clickedDate: this.props.item.datas[index]
         });
+        AsyncStorage.setItem('indexData', index);
     };
 
+    // async componentDidMount() {
+    //     const indexMateria = await AsyncStorage.getItem('indexMateria');
+    //     console.log('indexMateria', indexMateria);
+    // }
+
     render() {
-        console.log('classDAte',this.props.item)
+        
         return (
             <View>
                 { this.props.item.datas.map((item, index) => {
@@ -23,7 +30,7 @@ class ClassDate extends Component {
                         <ListDate
                             key={index} 
                             item={item}
-                            onItemPressed={() => this.classRoomHandler(this.props.item)}
+                            onItemPressed={() => this.classRoomHandler(this.props.item, index)}
                         />
                      )
 

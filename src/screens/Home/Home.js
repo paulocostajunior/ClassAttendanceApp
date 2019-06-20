@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, StyleSheet } from 'react-native';
+import { View, Text, AsyncStorage, StyleSheet } from 'react-native';
 import {connect} from 'react-redux';
 import User from '../../components/User/User';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { fetchTeacherClasses } from '../../actions';
+import { fetchTeacherClasses, fetchTeacherClassesComplete } from '../../actions';
 import ClassRoom from './../../components/ClassRoom/ClassRoom';
 
 class HomeScreen extends Component {
@@ -30,10 +30,10 @@ class HomeScreen extends Component {
   }
 
   render() {
-    
+    //console.log('teste', this.props.teacherClassesComplete.teacherClassesComplete)
     return (
       <View>
-        <User/>
+        <User {...this.props}/>
         {/* <SearchBar/> */}
         <View>
           <ClassRoom 
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
 // const mapStateToProps = state => {
 //   return {
-//     teacherClasses: state.teacherClasses
+//     teacherClassesComplete: state.teacherClasses
 //   };
 // };
 

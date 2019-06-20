@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "react-native";
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList, AsyncStorage} from "react-native";
 import ListSubject from '../ListSubject/ListSubject';
 import { connect } from 'react-redux';
 import { fetchTeacherClasses } from '../../actions';
@@ -13,29 +13,36 @@ class ClassRoom extends Component {
         
     }
 
-    classRoomHandler = (item) => {
+    classRoomHandler = (item, indexMateria, indexTurma) => {
         this.props.navigation.navigate('AttendanceDate', {
             item: item
         });
+        AsyncStorage.setItem('indexMateria',indexMateria);
+        AsyncStorage.setItem('indexTurma',indexTurma);
+        //console.log(AsyncStorage.getItem('indexMateria'))
     };
     
     render() {
-        console.log('classRoom',this.props.teacherClasses);
+        if (!this.props.teacherClasses) {
+            return <View><Text>Loading</Text></View>
+        }
         return (
             <View>
-                { this.props.teacherClasses.map((item) => (
-                    item.map((item2) => (
-                        item2.materias.map((item3) => {
+                {/* {console.log(this.props.teacherClasses.turmas)} */}
+                { this.props.teacherClasses.turmas.map((item, index) => (
+                        item.materias.map((item3, index3) => {
                             return (
                                 <ListSubject 
-                                    key={item._id} 
+                                    key={index3} 
                                     item={item3}
+                                    turma={item.descricao}
+                                    indexMateria={index3}
+                                    indexTurma={index}
                                     onItemPressed={this.classRoomHandler}
                                 /> 
                             )
-
                         })
-                    ))
+
                 ))}
             </View>
         )
@@ -44,7 +51,7 @@ class ClassRoom extends Component {
 
 const mapStateToProps = state => {
     return {
-      teacherClasses: Object.values(state.teacherClasses)
+      teacherClasses: state.teacherClasses.teacherClasses
     };
   };
   

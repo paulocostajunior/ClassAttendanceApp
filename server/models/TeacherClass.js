@@ -1,18 +1,50 @@
 const mongoose = require("mongoose");
 
 const TeacherClassSchema = new mongoose.Schema({
-    name: {
+    idProfessor: {
         type: String
     },
-    email: {
+    professor: {
         type: String
     },
-    password: {
+    login: {
         type: String
     },
-    date: {
-        type: Date
-    }
+    senha: {
+        type: String
+    },
+    turmas: [{
+        descricao: {
+            type: String
+        },
+        materias: [{
+            nome: {
+                type: String
+            },
+            alunos: [{
+                codigo: {
+                    type: String
+                },
+                nome: {
+                    type: String
+                },
+            }],
+            datas: [{
+                type: String
+            }],
+            absencias: [{
+                nome: {
+                    type: String
+                },
+                data: {
+                    type: String
+                },
+                exists: {
+                    type: Boolean
+                }
+            }]
+        }]
+    }]
 });
 
 module.exports = TeacherClass = mongoose.model('teacherclass', TeacherClassSchema);

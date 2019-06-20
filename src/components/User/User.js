@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Button, View, AsyncStorage} from 'react-native';
+import { StyleSheet, Text, Button, View, AsyncStorage, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
@@ -7,9 +7,19 @@ class User extends Component {
     state = {
         name: ''
     }
+
+    constructor(props) {
+        super(props)
+      }
+      
     async componentDidMount() {
         const nameProfessor = await AsyncStorage.getItem('name');
         this.setState({name: nameProfessor})
+    }
+
+    logoutHandler = () => {
+        AsyncStorage.removeItem('token');
+        this.props.navigation.navigate('Auth')
     }
 
     render() {
@@ -17,8 +27,8 @@ class User extends Component {
         return (
             <View style={styles.container}>
                 <Icon style={styles.userImage} size={25} name={'md-person'}  />
-                <Text style={styles.userText}>{this.state.name}
-                </Text>
+                <Text style={styles.userText}>{this.state.name}</Text>
+                <TouchableOpacity onPress={this.logoutHandler}><View><Text style={styles.logout}>(Logout)</Text></View></TouchableOpacity>
             </View>
         );
     };
@@ -30,13 +40,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         height: 50,
         borderBottomColor: 'black',
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'center'
     },
     userText: {
-        fontSize: 16
+        fontSize: 16,
+        paddingRight: 50
     },
     userImage: {
+        paddingLeft: 100,
         paddingRight: 20
     }
 });

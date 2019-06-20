@@ -3,6 +3,6 @@ import teacherClassesReducer from './teacherClassesReducer';
 import { authReducer } from './teacherClassesReducer';
 
 export default combineReducers ({
-    teacherClasses: teacherClassesReducer,
+    teacherClasses: teacherClassesReducer
     // authReducer: authReducer
 });

@@ -4,8 +4,8 @@ import { StyleSheet, Text, ScrollView, View, TouchableOpacity, FlatList} from "r
 const ListStudent = props => {
     console.log(props)
     return (
-    // <TouchableOpacity onPress={props.onItemPressed}>
-    <TouchableOpacity>
+    //<TouchableOpacity onPress={props.onItemPressed}>
+    <TouchableOpacity onPress={props.onItemPressed}>
         <View 
             style=  {[
                         styles.sectionStyle,
@@ -13,7 +13,7 @@ const ListStudent = props => {
                         alignItems: 'center',
                         justifyContent: 'space-evenly',
                         },
-                        props.absencias.exists ? styles.bgColorRed : styles.bgColorGreen
+                        props.absencias.exists ? styles.bgColorGreen : styles.bgColorRed
                     ]}
         >
             <Text>{props.item}</Text>
